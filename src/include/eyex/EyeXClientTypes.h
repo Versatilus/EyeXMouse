@@ -88,21 +88,21 @@ typedef enum {
   call txEnableConnection. 
 
   @field TX_CONNECTIONSTATE_CONNECTED:
-    The client is now connected to the client.
+    The client is now connected to the server.
 
   @field TX_CONNECTIONSTATE_DISCONNECTED:
-    The client is now disconnected from the client. Unless this is due to txDisableConnection being called the client
+    The client is now disconnected from the server. Unless this is due to txDisableConnection being called the client
     will shortly attempt to connect again.
     
   @field TX_CONNECTIONSTATE_TRYINGTOCONNECT:
-    The client is now trying to connect to the client. This is the first state being sent to the application after 
+    The client is now trying to connect to the server. This is the first state being sent to the application after 
     txEnableConnection has been called.
     
   @field TX_CONNECTIONSTATE_SERVERVERSIONTOOLOW:
-    the client version is too low. The client is not connected and will not try to reconnect.
+    the server version is too low. The client is not connected and will not try to reconnect.
     
   @field TX_CONNECTIONSTATE_SERVERVERSIONTOOHIGH:
-    the client version is too high. The client is not connected and will not try to reconnect.
+    the server version is too high. The client is not connected and will not try to reconnect.
  */ 
 typedef enum {
     TX_CONNECTIONSTATE_CONNECTED = TX_ENUM_STARTVALUE,  
@@ -240,6 +240,29 @@ typedef enum {
     TX_PROPERTYBAGTYPE_OBJECT = TX_ENUM_STARTVALUE,
     TX_PROPERTYBAGTYPE_ARRAY
 } TX_PROPERTYBAGTYPE;
+
+/*********************************************************************************************************************/
+
+/**
+  TX_EYEXAVAILABILITY
+
+  Enumeration for the availability status of the EyeX Engine.
+
+  @field TX_EYEXAVAILABILITY_NOTAVAILABLE:
+    EyeX Engine is not installed on the system or otherwise not available.
+
+  @field TX_EYEXAVAILABILITY_NOTRUNNING:
+	EyeX Engine is not running.
+  
+  @field TX_EYEXAVAILABILITY_RUNNING:
+	EyeX Engine is running.
+ */
+typedef enum {
+	TX_EYEXAVAILABILITY_NOTAVAILABLE = TX_ENUM_STARTVALUE,
+	TX_EYEXAVAILABILITY_NOTRUNNING,
+	TX_EYEXAVAILABILITY_RUNNING
+} TX_EYEXAVAILABILITY;
+
 
 /*********************************************************************************************************************
  * Callbacks
@@ -563,19 +586,20 @@ typedef struct {
   Struct for pannable behavior parameters.
    
   @field IsHandsFreeEnabled:
-    Specifies if a user input action is needed to initiate pan.
+    Set to TX_FALSE - hands free panning is not yet implemented.
   
   @field Profile:
     The panning profile. See TX_PANNINGPROFILE.
     
   @field PeakVelocity:
-    The maximum velocity of panning action, in pixels per second.
+    Currently not used.
   
   @field PanDirectionsAvailable:
-    The available pan direction flags. See TX_PANDIRECTION. Proper directions are needed for panning to work. 
+    Flags specifying which pan directions are currently possible. See TX_PANDIRECTION.
+    Correct pan direction flags are needed for panning to work properly. 
  */
 typedef struct {
-    TX_BOOL            IsHandsFreeEnabled;             
+    TX_BOOL            IsHandsFreeEnabled;
     TX_PANNINGPROFILE  Profile;                        
     TX_REAL            PeakVelocity;                   
     TX_PANDIRECTION    PanDirectionsAvailable;         
@@ -606,7 +630,7 @@ typedef struct {
     The step length on the X axis in pixels.
   
   @field PanStepY:    
-    The step length on the X axis in pixels.
+    The step length on the Y axis in pixels.
     
   @field PanStepDuration:    
     The amount of time in seconds during which the step should be performed.
@@ -636,9 +660,13 @@ typedef struct {
    
   @field EnableTentativeFocus:
     Specifies if tentative focus should be enabled.
+  @field EnableSmallItemActivation:
+    Specifies if small item detection should be enabled.
+	For internal use only.
  */
 typedef struct {
-    TX_BOOL EnableTentativeFocus;                       
+    TX_BOOL EnableTentativeFocus;    
+    TX_BOOL EnableSmallItemDetection;
 } TX_ACTIVATABLEPARAMS;
 
 /*********************************************************************************************************************/
@@ -786,13 +814,13 @@ typedef struct {
     Specifies if the data for the right eye is valid.
     
   @field LeftEyeX:
-    The X coordinate of the left eye in millimiters.
+    The X coordinate of the left eye in millimeters.
     
   @field LeftEyeY:
-    The Y coordinate of the left eye in millimiters.
+    The Y coordinate of the left eye in millimeters.
     
   @field LeftEyeZ:
-    The Z coordinate of the left eye in millimiters.
+    The Z coordinate of the left eye in millimeters.
 
   @field LeftEyeXNormalized:
     The X coordinate of the left eye normalized in the track box.
@@ -804,13 +832,13 @@ typedef struct {
     The Z coordinate of the left eye normalized in the track box.
     
   @field RightEyeX:
-    The X coordinate of the right eye in millimiters.
+    The X coordinate of the right eye in millimeters.
     
   @field RightEyeY:
-    The Y coordinate of the right eye in millimiters.
+    The Y coordinate of the right eye in millimeters.
     
   @field RightEyeZ:
-    The Z coordinate of the right eye in millimiters.
+    The Z coordinate of the right eye in millimeters.
 
   @field RightEyeXNormalized:
     The X coordinate of the right eye normalized in the track box.

@@ -14,14 +14,13 @@ TX_NAMESPACE_BEGIN
 
 class Environment 
 {	
-public:
 	Environment(
 		TX_EYEXCOMPONENTOVERRIDEFLAGS flags,
 		TX_LOGGINGMODEL* pLoggingModel,
 		TX_THREADINGMODEL* pThreadingModel,
 		TX_SCHEDULINGMODEL* pSchedulingModel,
         void* pMemoryModel);
-
+public:
 	virtual ~Environment();
 
 	static std::shared_ptr<Environment> Initialize(
@@ -30,6 +29,9 @@ public:
 		TX_THREADINGMODEL* pThreadingModel,
 		TX_SCHEDULINGMODEL* pSchedulingModel,
         void* pMemoryModel);
+
+	TX_EYEXAVAILABILITY GetEyeXAvailability();
+    static bool IsInitialized();
 };
 
 /*********************************************************************************************************************/

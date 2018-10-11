@@ -18,6 +18,8 @@ class Snapshot :
 public:
 	Snapshot(const std::shared_ptr<const Context>& spContext, TX_HANDLE hSnapshot);
 	static std::shared_ptr<Snapshot> CreateSnapshotForQuery(const std::shared_ptr<Query>& spQuery);  
+	static std::shared_ptr<Snapshot> CreateSnapshotWithQueryBounds(const std::shared_ptr<Query>& spQuery);  
+
 		
     std::shared_ptr<Bounds> GetBounds() const;
     std::shared_ptr<Bounds> CreateBounds(TX_BOUNDSTYPE boundsType);

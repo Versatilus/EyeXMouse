@@ -38,7 +38,25 @@ inline std::shared_ptr<Environment> Environment::Initialize(
 	TX_SCHEDULINGMODEL* pSchedulingModel,
     void* pMemoryModel)
 {
-	return std::make_shared<Environment>(flags, pLoggingModel, pThreadingModel, pSchedulingModel, pMemoryModel);
+    return std::shared_ptr<Environment>(new Environment(flags, pLoggingModel, pThreadingModel, pSchedulingModel, pMemoryModel));
+}
+
+/*********************************************************************************************************************/
+
+inline TX_EYEXAVAILABILITY Environment::GetEyeXAvailability()
+{
+	TX_EYEXAVAILABILITY availability;
+	TX_VALIDATE(txGetEyeXAvailability(&availability));
+	return availability;
+}
+
+/*********************************************************************************************************************/
+
+inline bool Environment::IsInitialized()
+{
+    TX_BOOL res;
+    txIsEyeXInitialized(&res);
+    return res != TX_FALSE;
 }
 
 /*********************************************************************************************************************/

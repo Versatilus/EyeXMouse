@@ -15,9 +15,10 @@ TX_NAMESPACE_BEGIN
 class Context : 
     public std::enable_shared_from_this<Context>
 {
+    Context(bool trackObjects);
+
 public:
     static std::shared_ptr<Context> Create(bool trackObjects);
-    Context(bool trackObjects);
     virtual ~Context();
 
 	TX_CONTEXTHANDLE GetHandle() const;
@@ -30,6 +31,7 @@ public:
     void EnableConnection();
     void DisableConnection();
     void Shutdown();
+
 
     TX_TICKET RegisterMessageHandler(TX_MESSAGETYPE messageType, std::shared_ptr<const InteractionObject> spOptions, AsyncDataHandler fnAsyncDataHandler);
     void UnregisterMessageHandler(TX_TICKET ticket);
@@ -60,6 +62,8 @@ public:
 
     void DisableBuiltinKeys(const std::string& windowId, AsyncDataHandler fnCompletion = nullptr) const;
     void EnableBuiltinKeys(const std::string& windowId, AsyncDataHandler fnCompletion = nullptr) const;
+
+	void LaunchConfigurationTool(TX_CONFIGURATIONTOOL configurationTool, AsyncDataHandler fnCompletion = nullptr) const;
 
     template <typename TInteractionObject>
     std::shared_ptr<TInteractionObject> CreateObject(TX_HANDLE hObject) const;

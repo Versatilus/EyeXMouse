@@ -15,7 +15,9 @@
     /**
     *   Snapshot internal literals
     */
-    static const char* TX_INTERNALLITERAL_NONAUTHORITATIVEWINDOWIDS = "NonAuthoritativeWindowIds";                   
+    static const char* TX_INTERNALLITERAL_NONAUTHORITATIVEWINDOWIDS = "NonAuthoritativeWindowIds";       
+    static const char* TX_INTERNALLITERAL_FOCUSEDTOPLEVELWINDOW = "FocusedTopLevelWindow";
+    static const char* TX_INTERNALLITERAL_ISFOCUSEDTOPLEVELWINDOW = "IsFocusedTopLevelWindow";
 
     /**
     *   Callback Response Literals
@@ -31,7 +33,7 @@
     static const char* TX_INTERNALLITERAL_GLOBALTERMINATEGXSERVER = "Global\\TerminateGxServer";    
 
    /**
-    *   Internal Raw Gaze Data Literals
+    *   Internal Raw Gaze Data LiteralsConfiguredEyesWithGaze
     **/
     static const char* TX_INTERNALLITERAL_EYEPOSITIONFROMSCREENCENTERMM = "EyePositionFromScreenCenterMM";
     static const char* TX_INTERNALLITERAL_EYEPOSITIONINTRACKBOXNORMALIZED = "EyePositionInTrackBoxNormalized";
@@ -42,12 +44,12 @@
     static const char* TX_INTERNALLITERAL_TOPRIGHT = "TopRight";
     static const char* TX_INTERNALLITERAL_SCREENBOUNDSMM = "ScreenBoundsMm";
     static const char* TX_INTERNALLITERAL_SCREENBOUNDSPIXELS = "ScreenBoundsPixels";
-    static const char* TX_INTERNALLITERAL_TRACKEDEYES = "TrackedEyes"; 
+    static const char* TX_INTERNALLITERAL_CONFIGUREDEYESWITHGAZE = "ConfiguredEyesWithGaze"; 
     //these below could be in an enum, but wont be, since its an internal stream
-    static const char* TX_INTERNALLITERAL_TRACKEDEYESNONE = "TrackedEyesNone";
-    static const char* TX_INTERNALLITERAL_TRACKEDEYESBOTH = "TrackedEyesBoth";
-    static const char* TX_INTERNALLITERAL_TRACKEDEYESLEFT = "TrackedEyesLeft";
-    static const char* TX_INTERNALLITERAL_TRACKEDEYESRIGHT = "TrackedEyesRight";
+	static const char* TX_INTERNALLITERAL_CONFIGUREDEYESWITHGAZENONE = "ConfiguredEyesWithGazeNone";
+	static const char* TX_INTERNALLITERAL_CONFIGUREDEYESWITHGAZEBOTH = "ConfiguredEyesWithGazeBoth";
+	static const char* TX_INTERNALLITERAL_CONFIGUREDEYESWITHGAZELEFT = "ConfiguredEyesWithGazeLeft";
+	static const char* TX_INTERNALLITERAL_CONFIGUREDEYESWITHGAZERIGHT = "ConfiguredEyesWithGazeRight";
 
     static const char* TX_INTERNALLITERAL_DETECTEDEYES = "DetectedEyes";
     static const char* TX_INTERNALLITERAL_DETECTEDEYESNONE = "DetectedEyesNone";
@@ -61,7 +63,18 @@
     static const char* TX_INTERNALLITERAL_ZOOMDIRECTION = "ZoomDirection";
     static const char* TX_INTERNALLITERAL_ZOOMGAZEPOINTX = "ZoomGazePointX";
     static const char* TX_INTERNALLITERAL_ZOOMGAZEPOINTY = "ZoomGazePointY";
-	
+		
+    /**
+    *   Internal Eye Position Behavior Literals
+    **/
+    static const char* TX_INTERNALLITERAL_LEFTEYETRACKED = "LeftEyeTracked";
+    static const char* TX_INTERNALLITERAL_RIGHTEYETRACKED = "RightEyeTracked";
+
+    /**
+    *   Internal Process Client Ids
+    **/
+    static const char* TX_INTERNALLITERAL_CLIENTPROCESSIDS = "ClientProcessIds";
+
 
 
 /*********************************************************************************************************************/

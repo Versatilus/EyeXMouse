@@ -92,7 +92,7 @@ typedef TX_RESULT (TX_CALLCONVENTION *ReleaseContextHook)(
   @param cleanupTimeout [in]: 
     The amount of time in millseconds to wait for objects to be released.
     Use the constant TX_CLEANUPTIMEOUT_DEFAULT for a default timeout of 500 ms.
-    Use the special value TX_CLEANUPTIMEOUT_FORCEIMMEDIATE to delete the context immediately, without checking for 
+    Use the special value TX_CLEANUPTIMEOUT_FORCEIMMEDIATE to shut down the context immediately, without checking for 
     leaking objects.
 
   @param logLeakingObjectsInfo [in]: 

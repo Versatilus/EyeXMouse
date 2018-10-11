@@ -10,7 +10,7 @@
 
 TX_NAMESPACE_BEGIN
 
-	/*********************************************************************************************************************/
+/*********************************************************************************************************************/
 
 	inline Snapshot::Snapshot(const std::shared_ptr<const Context>& spContext, TX_HANDLE hSnapshot)
 	: InteractionObject(spContext, hSnapshot)
@@ -22,6 +22,18 @@ inline std::shared_ptr<Snapshot> Snapshot::CreateSnapshotForQuery(const std::sha
 {
 	Tx::Utils::ScopedHandle hSnapshot;
 	TX_VALIDATE(txCreateSnapshotForQuery(spQuery->GetHandle(), &hSnapshot));
+
+	auto spContext = spQuery->GetContext();
+	auto spSnapshot = spContext->CreateObject<Snapshot>(hSnapshot);
+	return spSnapshot;
+}
+
+/*********************************************************************************************************************/
+
+inline std::shared_ptr<Snapshot> Snapshot::CreateSnapshotWithQueryBounds(const std::shared_ptr<Query>& spQuery)
+{
+	Tx::Utils::ScopedHandle hSnapshot;
+    TX_VALIDATE(txCreateSnapshotWithQueryBounds(spQuery->GetHandle(), &hSnapshot));
 
 	auto spContext = spQuery->GetContext();
 	auto spSnapshot = spContext->CreateObject<Snapshot>(hSnapshot);

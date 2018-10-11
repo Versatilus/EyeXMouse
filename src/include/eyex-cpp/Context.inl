@@ -14,7 +14,7 @@ TX_NAMESPACE_BEGIN
 
 inline std::shared_ptr<Context> Context::Create(bool trackObjects)
 {
-	return std::make_shared<Context>(trackObjects);
+    return std::shared_ptr<Context>(new Context(trackObjects));
 }
 
 /*********************************************************************************************************************/
@@ -351,6 +351,18 @@ inline void Context::EnableBuiltinKeys(const std::string& windowId, AsyncDataHan
 	};
 
     TX_VALIDATE(Tx::EnableBuiltinKeys(_hContext, windowId.c_str(), callback));
+}
+
+/*********************************************************************************************************************/
+
+inline void Context::LaunchConfigurationTool(TX_CONFIGURATIONTOOL configurationTool, AsyncDataHandler fnCompletion) const
+{
+	auto callback = [&, fnCompletion](TX_CONSTHANDLE hAsyncData)
+	{
+		InvokeAsyncDataHandler(hAsyncData, fnCompletion);
+	};
+
+	TX_VALIDATE(Tx::LaunchConfigurationTool(_hContext, configurationTool, callback));
 }
 
 /*********************************************************************************************************************/

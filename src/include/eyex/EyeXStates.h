@@ -415,6 +415,8 @@ typedef TX_RESULT (TX_CALLCONVENTION *GetStateValueAsRealHook)(
     A TX_STRING to which the state value will be copied.
     Must be at least the size of the value.
     Can be NULL to only get the size of the value.
+    If the state value is an array of strings the returned string will contain all strings 
+    separated with null termination and with an extra ending null termination.
  
   @param pStringSize [in,out]: 
     A pointer to a TX_SIZE which will be set to the size of the state value.
@@ -427,7 +429,7 @@ typedef TX_RESULT (TX_CALLCONVENTION *GetStateValueAsRealHook)(
     TX_RESULT_INVALIDARGUMENT: An invalid argument was passed to the function.
     TX_RESULT_INVALIDBUFFERSIZE: The size of pStringValue is invalid (*pStringSize will be set to the required size). 
     TX_RESULT_NOTFOUND: The value was not found.
-    TX_RESULT_INVALIDPROPERTYTYPE: The value type was not TX_PROPERTYVALUETYPE_STRING.
+    TX_RESULT_INVALIDPROPERTYTYPE: The value type was not TX_PROPERTYVALUETYPE_STRING or array of TX_PROPERTYVALUETYPE_STRING.
  */
 TX_C_BEGIN
 TX_API TX_RESULT TX_CALLCONVENTION txGetStateValueAsString(
@@ -856,6 +858,11 @@ typedef TX_RESULT (TX_CALLCONVENTION *GetPropertyForStateValueHook)(
     This ticket should be used for unregistration.
     Must not be NULL.
 
+  @param statePath [in]:
+	A string that specifies the path of the state to register state changed handler for.
+	Must not start with, end with or have two consecutive dots (.).
+	Must not be NULL or empty string.
+
   @param handler [in]: 
     A TX_ASYNCDATACALLBACK which will be called when a state changes.
     Must not be NULL.
@@ -889,7 +896,7 @@ typedef TX_RESULT (TX_CALLCONVENTION *RegisterStateChangedHandlerHook)(
 /*********************************************************************************************************************/
 
 /**
-  txUnregisterQueryHandler
+  txUnregisterStateChangedHandler
 
   Unregisters a previously registered state changed handler callback. 
   

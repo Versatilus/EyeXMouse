@@ -172,7 +172,7 @@ static TX_DEBUGSCOPEDHANDLE txDebugScopedHandle = __txDbgScoped;
 /*********************************************************************************************************************/
 
 /**
-  txCommitSnapshotAsync. This is a functional-enabled version txCommitSnapshotAsync defined in EyeXSnapshot.h
+  Tx::CommitSnapshotAsync. This is a functional-enabled version of txCommitSnapshotAsync defined in EyeXSnapshot.h
  */
 
 /*********************************************************************************************************************/
@@ -186,7 +186,7 @@ TX_API_FUNCTION_CPP(CommitSnapshotAsync, (
 /*********************************************************************************************************************/
 
 /**
-  txGetStateAsync. This is a functional-enabled version txGetStateAsync defined in EyeXStates.h
+  Tx::GetStateAsync. This is a functional-enabled version of txGetStateAsync defined in EyeXStates.h
  */
 
 /*********************************************************************************************************************/
@@ -199,7 +199,7 @@ TX_API_FUNCTION_CPP(GetStateAsync,(
 /*********************************************************************************************************************/
 
 /**
-  txSetStateAsync. This is a functional-enabled version txESetStateAsync defined in EyeXStates.h
+  Tx::SetStateAsync. This is a functional-enabled version of txESetStateAsync defined in EyeXStates.h
  */
 
 /*********************************************************************************************************************/
@@ -211,7 +211,7 @@ TX_API_FUNCTION_CPP(SetStateAsync, (
 /*********************************************************************************************************************/
 
 /**
-  txRegisterStateChangedHandler. This is a functional-enabled version txRegisterStateChangedHandler defined in EyeXStates.h
+  Tx::RegisterStateChangedHandler. This is a functional-enabled version of txRegisterStateChangedHandler defined in EyeXStates.h
  */
 
 /*********************************************************************************************************************/
@@ -225,7 +225,7 @@ TX_API_FUNCTION_CPP(RegisterStateChangedHandler, (
 /*********************************************************************************************************************/
 
 /**
-  txExecuteCommandAsync. This is a functional-enabled version txExecuteCommandAsync defined in EyeXCommand.h
+  Tx::ExecuteCommandAsync. This is a functional-enabled version of txExecuteCommandAsync defined in EyeXCommand.h
  */
 
 /*********************************************************************************************************************/
@@ -238,7 +238,7 @@ TX_API_FUNCTION_CPP(ExecuteCommandAsync, (
 /*********************************************************************************************************************/
 
 /**
-  txRegisterMessageHandler. This is a functional-enabled version txRegisterMessageHandler defined in EyeXContext.h
+  Tx::RegisterMessageHandler. This is a functional-enabled version of txRegisterMessageHandler defined in EyeXContext.h
  */
 
 /*********************************************************************************************************************/
@@ -253,7 +253,7 @@ TX_API_FUNCTION_CPP(RegisterMessageHandler,(
 /*********************************************************************************************************************/
 
 /**
-  txDisableBuiltinKeys. This is a functional-enabled version txDisableBuiltinKeys defined in EyeXActions.h
+  Tx::DisableBuiltinKeys. This is a functional-enabled version of txDisableBuiltinKeys defined in EyeXActions.h
  */
 
 /*********************************************************************************************************************/
@@ -266,7 +266,7 @@ TX_API_FUNCTION_CPP(DisableBuiltinKeys,(
 /*********************************************************************************************************************/
 
 /**
-  txEnableBuiltinKeys. This is a functional-enabled version txEnableBuiltinKeys defined in EyeXActions.h
+  Tx::EnableBuiltinKeys. This is a functional-enabled version of txEnableBuiltinKeys defined in EyeXActions.h
  */
 
 /*********************************************************************************************************************/
@@ -275,6 +275,72 @@ TX_API_FUNCTION_CPP(EnableBuiltinKeys,(
     TX_CONTEXTHANDLE hContext,
     TX_CONSTSTRING windowId,    
     const Tx::AsyncDataCallback& completionHandler));
+
+/*********************************************************************************************************************/
+
+/**
+  Tx::LaunchConfigurationTool. This is a functional-enabled version of txLaunchConfigurationTool defined in EyeXActions.h
+*/
+
+/*********************************************************************************************************************/
+
+TX_API_FUNCTION_CPP(LaunchConfigurationTool, (
+	TX_CONTEXTHANDLE hContext,
+	TX_CONFIGURATIONTOOL configurationTool,
+	const Tx::AsyncDataCallback& completionHandler));
+
+/*********************************************************************************************************************/
+
+/**
+  Tx::SetCurrentProfile. This is a functional-enabled version of txSetCurrentProfile defined in EyeXActions.h
+*/
+
+/*********************************************************************************************************************/
+
+TX_API_FUNCTION_CPP(SetCurrentProfile, (
+	TX_CONTEXTHANDLE hContext,
+	TX_CONSTSTRING profileName,
+	const Tx::AsyncDataCallback& completionHandler));
+
+/*********************************************************************************************************************/
+
+/**
+  Tx::DeleteProfile. This is a functional-enabled version of txDeleteProfile defined in EyeXActions.h
+*/
+
+TX_API_FUNCTION_CPP(DeleteProfile, (
+	TX_CONTEXTHANDLE hContext,
+	TX_CONSTSTRING profileName,
+	const Tx::AsyncDataCallback& completionHandler));
+
+/*********************************************************************************************************************/
+
+/**
+* Tx::GetStateValueAsArrayOfUnicodeStrings. This is a utility function to get state values as an array of strings. 
+
+  \Since 1.3.0
+
+  @param hStateBag [in]:
+    A TX_CONSTHANDLE to the state bag from which the value should be retrieved.
+    Must not be TX_EMPTY_HANDLE.
+    
+  @param valuePath [in]:
+    The path to the value.
+
+  @param valuePath [out]:
+    A vector of strings to which the string values will be copied.
+
+  @return
+    TX_RESULT_OK: The state value was successfully retrieved.
+    TX_RESULT_EYEXNOTINITIALIZED: The EyeX client environment is not initialized.
+    TX_RESULT_INVALIDARGUMENT: An invalid argument was passed to the function.
+    TX_RESULT_NOTFOUND: The value was not found.
+    TX_RESULT_INVALIDPROPERTYTYPE: The value type was not TX_PROPERTYVALUETYPE_STRING or array of TX_PROPERTYVALUETYPE_STRING.
+*/
+TX_API_FUNCTION_CPP(GetStateValueAsArrayOfStrings, (
+    TX_CONSTHANDLE hStateBag,
+    TX_CONSTSTRING valuePath,
+    TX_REF_PARAM(std::vector<std::string>) arrayOfStrings));
 
 /*********************************************************************************************************************/
 
